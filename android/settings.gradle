@@ -1,0 +1,3 @@
+rootProject.name = 'EleccionesMobile'
+
+include ':app'
