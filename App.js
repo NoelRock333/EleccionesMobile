@@ -9,9 +9,12 @@ import {
   StyleSheet,
   Text,
   View,
-  AsyncStorage
+  AsyncStorage,
+  TextInput,
+  Button
 } from 'react-native';
 import Api from './utils/api';
+import Login from './components/Login'
 
 export default class App extends Component {
   state = {
@@ -19,19 +22,19 @@ export default class App extends Component {
   };
 
   async componentDidMount() {
-    const jwt = await AsyncStorage.getItem('jwt');
-    console.log(jwt);
-    // this.setState({
-    //   isLoged: value ? true : false
-    // });
+    const jwt = await AsyncStorage.getItem('@EleccionesApp:jwt');
+    this.setState({
+      isLoged: jwt ? true : false
+    });
   }
 
   login = useraccount => {
     return Api.post('/users/login', useraccount)
       .then(data => data.json())
       .then(data => {
+        console.log(data)
         if (data && data.jwt) {
-          AsyncStorage.setItem('jwt', data.jwt).then(() => {
+          AsyncStorage.setItem('@EleccionesApp:jwt', data.jwt).then(() => {
             this.setState({
               isLoged: true
             });
@@ -45,23 +48,21 @@ export default class App extends Component {
   };
 
   logout = () => {
-    AsyncStorage.removeItem('jwt');
+    AsyncStorage.removeItem('@EleccionesApp:jwt');
     this.setState({
       isLoged: false
     });
   };
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
+    if (!this.state.isLoged) {
+      return <Login login={this.login} />;
+    } else {
+      return <View>
+        <Text>Logueado</Text>
+        <Button title="Cerrar sesión" onPress={this.logout} />
       </View>
-    );
+    }
   }
 }
 
