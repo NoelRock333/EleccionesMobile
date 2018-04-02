@@ -8,28 +8,48 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
-import SInfo from 'react-native-sensitive-info';
-
-const options = {
-  sharedPreferencesName: 'tallerRN',
-  keychainService: 'tallerRN'
-};
+import Api from './utils/api';
 
 export default class App extends Component {
   state = {
     isLoged: null
   };
 
-  componentDidMount() {
-    const jwt = SInfo.getItem('jwt', options).then(value => {
-      console.warn(value);
-      this.setState({
-        isLoged: value ? true : false
-      });
-    });
+  async componentDidMount() {
+    const jwt = await AsyncStorage.getItem('jwt');
+    console.log(jwt);
+    // this.setState({
+    //   isLoged: value ? true : false
+    // });
   }
+
+  login = useraccount => {
+    return Api.post('/users/login', useraccount)
+      .then(data => data.json())
+      .then(data => {
+        if (data && data.jwt) {
+          AsyncStorage.setItem('jwt', data.jwt).then(() => {
+            this.setState({
+              isLoged: true
+            });
+          })
+        } else {
+          this.setState({
+            isLoged: false
+          });
+        }
+      });
+  };
+
+  logout = () => {
+    AsyncStorage.removeItem('jwt');
+    this.setState({
+      isLoged: false
+    });
+  };
 
   render() {
     return (
