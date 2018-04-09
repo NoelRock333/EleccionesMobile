@@ -1,8 +1,10 @@
 import { StackNavigator } from 'react-navigation';
-import Info from '../components/Info';
+import Municipalities from '../components/Municipalities';
+import ElectionTypes from '../components/ElectionTypes';
 
 const StackNav = StackNavigator({
-  Info: { screen: Info, headerMode: 'none' },
+  Municipalities: { screen: Municipalities, headerMode: 'none' },
+  ElectionTypes: { screen: ElectionTypes }
 });
 
 export default StackNav;

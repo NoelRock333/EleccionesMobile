@@ -14,7 +14,8 @@ import {
   Button
 } from 'react-native';
 import Api from './utils/api';
-import Login from './components/Login'
+import Login from './components/Login';
+import MainStack from './routes/MainStack';
 
 export default class App extends Component {
   state = {
@@ -55,14 +56,15 @@ export default class App extends Component {
   };
 
   render() {
-    if (!this.state.isLoged) {
-      return <Login login={this.login} />;
-    } else {
-      return <View>
-        <Text>Logueado</Text>
-        <Button title="Cerrar sesión" onPress={this.logout} />
-      </View>
-    }
+    // if (!this.state.isLoged) {
+    //   return <Login login={this.login} />;
+    // } else {
+    //   return <View>
+    //     <Text>Logueado</Text>
+    //     <Button title="Cerrar sesión" onPress={this.logout} />
+    //   </View>
+    // }
+    return <MainStack />
   }
 }
 
