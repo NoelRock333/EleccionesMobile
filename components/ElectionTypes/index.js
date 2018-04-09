@@ -20,7 +20,7 @@ class Municipalities extends React.Component {
   };
 
   render() {
-    const { selectedOpt } = this.state
+    const { selectedOpt } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.title}>
@@ -32,19 +32,19 @@ class Municipalities extends React.Component {
               isSelected={this.isSelected('PRESIDENTE_R', selectedOpt)}
               onPress={() => this.selection('PRESIDENTE_R')}
             >
-                PRESIDENTE DE LA REPÚBLICA
+              PRESIDENTE DE LA REPÚBLICA
             </SelectButton>
             <SelectButton
               isSelected={this.isSelected('SENADOR', selectedOpt)}
               onPress={() => this.selection('SENADOR')}
             >
-                SENADOR
+              SENADOR
             </SelectButton>
             <SelectButton
               isSelected={this.isSelected('DIPUTADO1', selectedOpt)}
               onPress={() => this.selection('DIPUTADO1')}
             >
-                DIPUTADO FEDERAL
+              DIPUTADO FEDERAL
             </SelectButton>
             <SelectButton
               isSelected={this.isSelected('DIPUTADO2', selectedOpt)}
@@ -82,13 +82,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 20
-  },
-  button: {
-    marginBottom: 10,
-    backgroundColor: '#ebebeb'
-  },
-  text: {
-    fontSize: 18
   },
   nextButton: {
     backgroundColor: 'purple',

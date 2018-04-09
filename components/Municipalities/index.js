@@ -131,13 +131,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 20
   },
-  button: {
-    marginBottom: 10,
-    backgroundColor: '#ebebeb'
-  },
-  text: {
-    fontSize: 18
-  },
   nextButton: {
     backgroundColor: 'purple',
     height: 50,
