@@ -4,9 +4,9 @@ import ElectionTypes from '../components/ElectionTypes';
 import PresidenteR from '../components/Poll/PresidenteR';
 
 const StackNav = StackNavigator({
+  ElectionTypes: { screen: ElectionTypes },
   PresidenteR: { screen: PresidenteR },
   Municipalities: { screen: Municipalities, headerMode: 'none' },
-  ElectionTypes: { screen: ElectionTypes },
 });
 
 export default StackNav;

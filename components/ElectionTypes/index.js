@@ -5,7 +5,29 @@ import SelectButton from '../shared/SelectButton';
 
 class Municipalities extends React.Component {
   state = {
-    selectedOpt: null
+    selectedOpt: null,
+    options: [
+      {
+        indentifier: 'PRESIDENTE_R',
+        title: 'PRESIDENTE DE LA REPÚBLICA'
+      },
+      {
+        indentifier: 'SENADOR',
+        title: 'SENADOR'
+      },
+      {
+        indentifier: 'DIPUTADO1',
+        title: 'DIPUTADO FEDERAL'
+      },
+      {
+        indentifier: 'DIPUTADO2',
+        title: 'DIPUTADO LOCAL'
+      },
+      {
+        indentifier: 'PRESIDENTE_M',
+        title: 'PRESIDENTE MUNICIPAL'
+      }
+    ]
   }
 
   isSelected = indentifier => {
@@ -19,8 +41,23 @@ class Municipalities extends React.Component {
     this.setState({ selectedOpt: option })
   };
 
+  renderOptions = (options) => {
+    return options.map(option => {
+      const isSelected = this.isSelected(option.indentifier, this.state.selectedOpt);
+      return (
+        <SelectButton
+          isSelected={isSelected}
+          onPress={() => this.selection(option.indentifier)}
+          key={option.indentifier}
+        >
+          {option.title}
+        </SelectButton>
+      );
+    })
+  };
+
   render() {
-    const { selectedOpt } = this.state;
+    const { options } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.title}>
@@ -28,36 +65,7 @@ class Municipalities extends React.Component {
         </View>
         <View style={{ flexDirection: 'row' }}>
           <View style={{ flex: 1, paddingLeft: 10, paddingRight: 5 }}>
-            <SelectButton
-              isSelected={this.isSelected('PRESIDENTE_R', selectedOpt)}
-              onPress={() => this.selection('PRESIDENTE_R')}
-            >
-              PRESIDENTE DE LA REPÚBLICA
-            </SelectButton>
-            <SelectButton
-              isSelected={this.isSelected('SENADOR', selectedOpt)}
-              onPress={() => this.selection('SENADOR')}
-            >
-              SENADOR
-            </SelectButton>
-            <SelectButton
-              isSelected={this.isSelected('DIPUTADO1', selectedOpt)}
-              onPress={() => this.selection('DIPUTADO1')}
-            >
-              DIPUTADO FEDERAL
-            </SelectButton>
-            <SelectButton
-              isSelected={this.isSelected('DIPUTADO2', selectedOpt)}
-              onPress={() => this.selection('DIPUTADO2')}
-            >
-              DIPUTADO LOCAL
-            </SelectButton>
-            <SelectButton
-              isSelected={this.isSelected('PRESIDENTE_M', selectedOpt)}
-              onPress={() => this.selection('PRESIDENTE_M')}
-            >
-              PRESIDENTE MUNICIPAL
-            </SelectButton>
+            {this.renderOptions(options)}
           </View>
         </View>
         <View style={{ alignItems: 'center' }}>
